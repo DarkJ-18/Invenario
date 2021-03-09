@@ -15,7 +15,14 @@ class CreateDetailedSalesTable extends Migration
     {
         Schema::create('detailed_sales', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('sales_id');
+            $table->unsignedBigInteger('product_id');
+            $table->string('nombre_producto');
+            $table->string('cantidad');
+            $table->string('total');
             $table->timestamps();
+            $table->foreign('sales_id')->references('id')->on('sales');
+            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 
