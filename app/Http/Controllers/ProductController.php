@@ -7,79 +7,69 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
-        //
+        $productos = Product::orderBy('id', 'DESC')->paginate(15);
+        return view('admin.productos.index', compact('productos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
-        //
+        $productos = Product::orderBy('nombre_producto', 'ASC')->pluck('nombre_producto', 'id');
+        return view('admin.productos.create', compact('productos'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre_producto' => ['required', 'max:30'],
+            'precio' => ['required', 'max:30'],
+            'cantidad' => ['required', 'max:30'],
+        ]);
+        $productos = new Product;
+        $productos->nombre_producto = e($request->nombre_producto);
+        $productos->precio = e($request->precio);
+        $productos->cantidad = e($request->cantidad);
+        $productos->save();
+        return redirect()->route('productos.index')->with('info', 'Producto agregado correctamente');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
+  
     public function show(Product $product)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
+    
+    public function edit($id)
     {
-        //
+        $productos = Product::where('id', $id)->firstOrFail();
+        return view('admin.productos.edit', compact('productos'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
+   
     public function update(Request $request, Product $product)
     {
-        //
+        $request->validate([
+            'nombre_producto' => ['required', 'max:30'],
+            'precio' => ['required', 'max:30'],
+            'cantidad' => ['required', 'max:30'],
+        ]);
+        $productos = new Product;
+        $productos->nombre_producto = e($request->nombre_producto);
+        $productos->precio = e($request->precio);
+        $productos->cantidad = e($request->cantidad);
+        $productos->save();
+        return redirect()->route('productos.index')->with('info', 'Producto actualizado correctamente');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Product $product)
+    
+    public function destroy($id)
     {
-        //
+        $productos = Product::findOrFail($id)->delete();
+        return back()->with('info', 'Producto eliminado correctamente');
     }
 }

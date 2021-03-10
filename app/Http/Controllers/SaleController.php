@@ -7,79 +7,60 @@ use Illuminate\Http\Request;
 
 class SaleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
-        //
+        $sales = Sale::orderBy('id', 'DESC')->paginate(15);
+        return view('admin.sales.index', compact('sales'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
-        //
+        return view('admin.sales.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'total' => ['required', 'max:10'],
+        ]);
+        $sales = new Sale;
+        $sales->total = e($request->total);
+        $sales->save();
+        return redirect()->route('sales.index')->with('info', 'Producto agregado correctamente');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Sale  $sale
-     * @return \Illuminate\Http\Response
-     */
+   
     public function show(Sale $sale)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Sale  $sale
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Sale $sale)
+    
+    public function edit($id)
     {
-        //
+        $sales = Sale::where('id', $id)->firstOrFail();
+        return view('admin.sales.edit', compact('sales'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Sale  $sale
-     * @return \Illuminate\Http\Response
-     */
+   
     public function update(Request $request, Sale $sale)
     {
-        //
+        $request->validate([
+            'total' => ['required', 'max:10'],
+        ]);
+        $sales = new Sale;
+        $sales->total = e($request->total);
+        $sales->save();
+        return redirect()->route('sales.index')->with('info', 'Producto actualizado correctamente');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Sale  $sale
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Sale $sale)
+    
+    public function destroy(Sale $id)
     {
-        //
+        $sales = Sale::findOrFail($id)->delete();
+        return back()->with('info', 'Producto eliminado correctamente');
     }
 }
