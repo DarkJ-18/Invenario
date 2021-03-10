@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::resource('admin/product', 'ProductController')->names('product');
+Route::resource('admin/sales', 'SaleController')->names('sales');
+Route::resource('admin/details', 'DetailedSaleController')->names('details');
+
 Route::get('/', function () {
     return view('welcome');
 });

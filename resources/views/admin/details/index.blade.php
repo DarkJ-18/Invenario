@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title','Titulo3')
+@section('title','Titulo2')
 @section('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
@@ -8,10 +8,10 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Titulo 3</h3>
+        <h3 class="card-title">titulo3</h3>
         <div class="card-tools">
             <a type="button" class="btn btn-tool" href="{{route('product.create')}}">
-                <h3 class="card-title">Titulo 4 <i class="fas fa-plus"></i></h3>
+                <h3 class="card-title">titulo 4 <i class="fas fa-plus"></i></h3>
             </a>
         </div>
     </div>
@@ -30,10 +30,12 @@
                 </tr>
             </thead>
             <tbody>
-               
+              
+
+              
             </tbody>
         </table>
-       
+        
     </div>
 </div>
 @endsection
