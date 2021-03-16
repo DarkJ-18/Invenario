@@ -44,10 +44,33 @@
 
             {{-- Main Content --}}
             <div class="content">
-                <div class="{{ config('adminlte.classes_content') ?: $def_container_class }}">
-                    @yield('content')
+            <section class="content">
+
+                @if (session('info'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{session('info')}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
+                @endif
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{$error}}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+                <!-- Default box -->
+                @yield('content')
+                <!-- /.card -->
+
+            </section>
+            <!-- /.content -->
+
+        </div>
 
         </div>
 
