@@ -290,7 +290,6 @@ return [
                 ],
             ],
         ],
-        ,
         [
             'text' => 'Inventario',
 
@@ -303,7 +302,8 @@ return [
                     'text' => 'Agregar Producto',
                     'route'  => 'productos.create'
                 ],
-            ],
+            ]
+        ],
         ['header' => 'labels'],
         [
             'text'       => 'important',
@@ -358,22 +358,22 @@ return [
 
     'plugins' => [
         'Datatables' => [
-            'active' => true,
+            'active' => false,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => true,
-                    'location' => 'vendor/datatables/js/jquery.dataTables.min.js',
+                    'asset' => false,
+                    'location' => '//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js',
                 ],
                 [
                     'type' => 'js',
-                    'asset' => true,
-                    'location' => 'vendor/datatables/js/dataTables.bootstrap4.min.js',
+                    'asset' => false,
+                    'location' => '//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => true,
-                    'location' => 'vendor/datatables/css/dataTables.bootstrap4.min.css',
+                    'asset' => false,
+                    'location' => '//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',
                 ],
             ],
         ],
