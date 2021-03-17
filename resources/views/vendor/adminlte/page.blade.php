@@ -45,7 +45,7 @@
             {{-- Main Content --}}
             <div class="content">
             <section class="content">
-
+                <!--Mensajes de alerta -->
                 @if (session('info'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{session('info')}}

@@ -19,7 +19,7 @@
         </div>
     </div>
     <br>
-    <div class="card-body table-responsive p-0" style="heigth:400px">
+    <div class="card-body table-responsive p-0" style="height:400px">
         <table id="products" class="table table-striped table-bordered">
             <thead>
                 <tr>
